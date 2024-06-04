@@ -1,11 +1,10 @@
-import React, { useEffect, useState } from 'react';
-import axios from 'axios';
-import { Button, List, ListItem, ListItemText } from '@mui/material';
+import { useEffect, useState } from 'react';
+import { Button } from '@mui/material';
 import { Activity } from '../models/activity';
-import ActivityList from '../../features/activities/ActivitiyList';
 import ActivityDashboard from '../../features/activities/ActicityDashboard';
 import Navbar from '../../components/NavBar';
 import { v4 as uuid } from 'uuid';
+import agent from '../api/agent';
 
 function App()
 {
@@ -13,10 +12,10 @@ function App()
 
   useEffect(() =>
   {
-    axios.get<Activity[]>('http://localhost:5000/api/activities').then(response =>
+    agent.Activities.list().then(response =>
     {
       console.log(response);
-      setActivities(response.data);
+      setActivities(response);
     });
   }, []);
 
